@@ -28,7 +28,6 @@ jobs:
 
       - name: install python packages
         run: |
-          cd code_samples
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
