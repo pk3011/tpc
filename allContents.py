@@ -37,7 +37,7 @@ def getContentInfo(contentId):
 
     onecontent = {
         "content_id": str(contentId),
-        "content_name": str(content_name),
+        "content_name": str(content_name).replace("('",'').replace("'),",''),
         "content_license_url": content_detail_dict.get('dashWidewineLicenseUrl', ''),
         "content_url": content_detail_dict.get('dashWidewinePlayUrl', ''),
         "content_entitlements": content_detail_dict.get('entitlements', ''),
