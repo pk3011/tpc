@@ -20,14 +20,14 @@ def getContentInfo(contentId):
       content_genre_alt = x.json()['data']['meta']['genre']
       content_detail_dict = x.json()['data']['detail']
       content_genre = content_meta.get('masterGenre[0]','')
-      content_logo = content_meta.get('previewImage','')
+      content_logo = content_meta.get('posterImage','')
       content_name = content_meta.get('title', ''),
     else:
         content_meta = x.json()['data']['meta']
         content_genre_alt = x.json()['data']['meta'][0]['genre']
         content_detail_dict = x.json()['data']['detail']
         content_genre = content_meta[0].get('primaryGenre','')
-        content_logo = content_meta[0].get('transparentImageUrl','')
+        content_logo = content_meta[0].get('boxCoverImage','')
         content_name= content_meta[0].get('title', ''),
     #covert content_genre list to string with comma
     if content_genre_alt is None:
