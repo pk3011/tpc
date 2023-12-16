@@ -48,7 +48,7 @@ def getContentInfo(contentId):
 
 def savecontentsToFile():
     print(len(content_list))
-    with open("allcontents.json", "w") as content_list_file:
+    with open("allContents.json", "w") as content_list_file:
         json.dump(content_list, content_list_file)
         content_list_file.close()
 
