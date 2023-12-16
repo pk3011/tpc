@@ -1,0 +1,49 @@
+name: TataSkyCatupDaily
+
+on:
+  schedule:
+    - cron: '0 11,23 * * *'
+  workflow_dispatch:
+    inputs:
+defaults:
+    run:
+      shell: bash
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: checkout repo content
+        uses: actions/checkout@v4 # checkout the repository content to github runner
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9' # install the python version needed
+
+      - name: install python packages
+        run: |
+          cd code_samples
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: execute py script # run main.py
+        run: python main.py
+
+      - name: commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git diff-index --quiet HEAD || (git commit -a -m "updated logs" --allow-empty)
+
+      - name: push changes
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          github_token: ${{ secrets.TOKEN }}
+          branch: main
