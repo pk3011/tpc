@@ -81,7 +81,7 @@ def getAllContents():
         processChunks(content_list)
         print("Saving all to a file.... " + str(len(content_list)))
         savecontentsToFile()
-    POST_URL="https://tm.tapi.videoready.tv/ta-recommendation/api/v1/recommend/UC_LAST_7DAY_EPISODES?max=20&layout=LANDSCAPE"
+    POST_URL="https://tm.tapi.videoready.tv/ta-recommendation/api/v1/recommend/UC_LAST_7DAY_EPISODES?max=200&layout=LANDSCAPE"
     x = requests.request("POST",POST_URL,headers=getHeaders(), data={})
     content_list = x.json()['data']['contentList']
     print("Total contents fetched:", len(content_list))
